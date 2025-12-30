@@ -490,6 +490,9 @@ class HomeController extends Controller
    {
 
       $nominee = $request->getParam('nominee');
+      $dni = $request->getParam('dni');
+      $dob = $request->getParam('dob');
+      $files = $request->getUploadedFiles();
 
       $nominees = $this->c->db->select('nominees', '*', ["id" => $nominee]);
       foreach ($nominees as $nom) {}
@@ -497,11 +500,53 @@ class HomeController extends Controller
       $categories = $this->c->db->select('categories', '*', ["id" => $nom["category_id"]]);
       foreach ($categories as $cat) {}
 
-      //Insert
+      // Validation
+      if (empty($dni) || empty($dob) || empty($files['signature'])) {
+         $this->c->flash->addMessage('error', 'Please fill all required fields and upload signature.');
+         return $response->withRedirect($this->c->router->pathFor('nominees', ['slug' => $cat["slug"]]));
+      }
+
+      // Handle File Upload
+      $uploadedFile = $files['signature'];
+      $signatureFilename = null;
+
+      if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
+        $directory = 'uploads/signatures';
+        $extension = strtolower(pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($extension, $allowedExtensions)) {
+            $this->c->flash->addMessage('error', 'Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.');
+            return $response->withRedirect($this->c->router->pathFor('nominees', ['slug' => $cat["slug"]]));
+        }
+
+        $basename = bin2hex(random_bytes(8));
+        $signatureFilename = sprintf('%s.%0.8s', $basename, $extension);
+        $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $signatureFilename);
+      } else {
+        $this->c->flash->addMessage('error', 'Error uploading signature.');
+        return $response->withRedirect($this->c->router->pathFor('nominees', ['slug' => $cat["slug"]]));
+      }
+
+      // Update User Info
+      $this->c->db->update('user', [
+        'dni' => $dni,
+        'dob' => $dob,
+        'signature' => $signatureFilename
+      ], [
+        'userid' => $this->c->user->data()["userid"]
+      ]);
+
+      //Insert Vote
        $insert = $this->c->db->insert('votes', [
          'userid' => $this->c->user->data()["userid"],
          'nominee' => $nominee,
          'category_id' => $nom["category_id"],
+         'name' => $this->c->user->data()["name"],
+         'dni' => $dni,
+         'dob' => $dob,
+         'signature' => $signatureFilename,
+         'created_at' => date('Y-m-d H:i:s'),
         ]); 
 
       if ($insert->rowCount() == 1) {

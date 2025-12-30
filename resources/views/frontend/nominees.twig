@@ -2,23 +2,23 @@
 
 
 {% block content %}
- 
+
 	    <!-- ==============================================
 	    Header Section Section
-	    =============================================== -->	
-		
+	    =============================================== -->
+
 		<section class="header-section">
 		 <div class="container">
 		  <div class="row banner-content">
   {% if date_to_end == date_to_now %}
 		   <span class="label label-grey">Voting Ended</span>
   {% else %}
-		 {% if start.end == 0 %} 
+		 {% if start.end == 0 %}
 		   <span class="label label-grey">Voting Underway</span>
 		 {% else %}
 		   <span class="label label-grey">Voting Ended</span>
-		 {% endif %}  
-  {% endif %}  
+		 {% endif %}
+  {% endif %}
 		   <p>From {{ date_to_start }} - {{ date_to_end }}</p>
 		   <h1>{{ cate.title }}</h1>
 		   <h4>{{ start.title }}</h4>
@@ -28,15 +28,15 @@
 
 	    <!-- ==============================================
 	    Voting Section
-	    =============================================== -->	
-		
+	    =============================================== -->
+
 		<section class="voting-section">
 		 <div class="container">
 		  <div class="row">
   {% if date_to_end == date_to_now %}
      <h1>Voting Ended.</h1>
   {% else %}
-	{% if start.end == 0 %}	  
+	{% if start.end == 0 %}
 		{% if user.isLoggedIn %}
 		  {% if user.verified == 1 %}
 		   <h1>Welcome {{ user.name }}, now vote</h1>
@@ -44,26 +44,26 @@
 		   <h1>Welcome {{ user.name }}, you need to get verified to vote</h1>
 		  {% elseif user.verified == 2 %}
 		   <h1>Welcome {{ user.name }}, your account has been declined</h1>
-		  {% endif %} 
+		  {% endif %}
 		{% else %}
 		   <h1>Please login to vote</h1>
 		{% endif %}
    {% else %}
      <h1>Voting Ended.</h1>
-   {% endif %}    
-  {% endif %}   
+   {% endif %}
+  {% endif %}
 		  </div>
 
-    {% if start.end == 1 %}	
+    {% if start.end == 1 %}
 
 					  <div class="row">
 
-					{% for index, nom in nominees %}  
-					  
-					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+					{% for index, nom in nominees %}
+
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">
 			            <div class="card card-profile card-plain">
 			             <div class="row">
-						 
+
 			              <div class="col-md-5">
 			               <div class="card-image">
 			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
@@ -92,11 +92,11 @@
 							    {% if value == ct.g %}
 
 							     {% if value == 0 %}
-                                  
+
                                   <h3 class="number">Draw</h3>
 
 							     {% else %}
-                                  
+
                                   <h3 class="number">Won</h3>
 
 							     {% endif %}
@@ -113,10 +113,10 @@
 						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
 
 			            {% endif %}
-			                
+
 			               </div><!--/card-body -->
 			              </div><!--/col-md-7 -->
-						  
+
 			             </div><!--/row -->
 			            </div><!--/card -->
 			           </div><!--/col-lg-7 -->
@@ -124,23 +124,23 @@
 				  {% if(index + 1) % 2 == 0 %}
 			       </div>
 			       <div class="row">
-			      {% endif %} 
+			      {% endif %}
 
-			        {% endfor %}   
-			  
-					  
-					  </div><!--/row -->    
+			        {% endfor %}
 
-    {% elseif date_to_end == date_to_now %}	
+
+					  </div><!--/row -->
+
+    {% elseif date_to_end == date_to_now %}
 
 					  <div class="row">
 
-					{% for index, nom in nominees %}  
-					  
-					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+					{% for index, nom in nominees %}
+
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">
 			            <div class="card card-profile card-plain">
 			             <div class="row">
-						 
+
 			              <div class="col-md-5">
 			               <div class="card-image">
 			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
@@ -169,11 +169,11 @@
 							    {% if value == ct.g %}
 
 							     {% if value == 0 %}
-                                  
+
                                   <h3 class="number">Draw</h3>
 
 							     {% else %}
-                                  
+
                                   <h3 class="number">Won</h3>
 
 							     {% endif %}
@@ -190,10 +190,10 @@
 						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
 
 			            {% endif %}
-			                
+
 			               </div><!--/card-body -->
 			              </div><!--/col-md-7 -->
-						  
+
 			             </div><!--/row -->
 			            </div><!--/card -->
 			           </div><!--/col-lg-7 -->
@@ -201,12 +201,12 @@
 				  {% if(index + 1) % 2 == 0 %}
 			       </div>
 			       <div class="row">
-			      {% endif %} 
+			      {% endif %}
 
-			        {% endfor %}   
-			  
-					  
-					  </div><!--/row -->    
+			        {% endfor %}
+
+
+					  </div><!--/row -->
 
 
     {% else %}
@@ -215,12 +215,12 @@
 
 					  <div class="row">
 
-					{% for index, nom in nominees %}  
-					  
-					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+					{% for index, nom in nominees %}
+
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">
 			            <div class="card card-profile card-plain">
 			             <div class="row">
-						 
+
 			              <div class="col-md-5">
 			               <div class="card-image">
 			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
@@ -247,10 +247,10 @@
 						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
 
 			            {% endif %}
-			                
+
 			               </div><!--/card-body -->
 			              </div><!--/col-md-7 -->
-						  
+
 			             </div><!--/row -->
 			            </div><!--/card -->
 			           </div><!--/col-lg-7 -->
@@ -258,26 +258,43 @@
 				  {% if(index + 1) % 2 == 0 %}
 			       </div>
 			       <div class="row">
-			      {% endif %} 
+			      {% endif %}
 
-			        {% endfor %}   
-			  
-					  
+			        {% endfor %}
+
+
 					  </div><!--/row -->
 
 			{% else %}
 
 
-			<form action="{{ path_for('vote') }}" method="post">	
+			<form action="{{ path_for('vote') }}" method="post" enctype="multipart/form-data">
+
+                      <div class="row">
+                       <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="dni">DNI</label>
+                                <input type="text" class="form-control" id="dni" name="dni" required placeholder="Enter your DNI">
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" class="form-control" id="dob" name="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signature">Signature (Image)</label>
+                                <input type="file" class="form-control" id="signature" name="signature" required accept="image/*">
+                            </div>
+                       </div>
+                      </div>
 
 					  <div class="row">
 
-					{% for index, nom in nominees %}  
-					  
-					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+					{% for index, nom in nominees %}
+
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">
 			            <div class="card card-profile card-plain">
 			             <div class="row">
-						 
+
 			              <div class="col-md-5">
 			               <div class="card-image">
 			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
@@ -297,12 +314,12 @@
 			                 <span class="checkmark"></span>
 			                </label>
 
-					  {% endif %} 	
-					{% endif %}		
+					  {% endif %}
+					{% endif %}
 
 			               </div><!--/card-body -->
 			              </div><!--/col-md-7 -->
-						  
+
 			             </div><!--/row -->
 			            </div><!--/card -->
 			           </div><!--/col-lg-7 -->
@@ -310,23 +327,23 @@
 				  {% if(index + 1) % 2 == 0 %}
 			       </div>
 			       <div class="row">
-			      {% endif %} 
+			      {% endif %}
 
-			        {% endfor %}   
-			  
-					  
+			        {% endfor %}
+
+
 					  </div><!--/row -->
 
 					  <div class="row">
-					  
 
-					   
-					   <div class="col-xl-12 col-lg-12 ml-auto mr-auto">  
+
+
+					   <div class="col-xl-12 col-lg-12 ml-auto mr-auto">
 					    <div class="voting-btn">
 					     <input type="submit" value="Vote" id="foo" class="kafe-btn kafe-btn-duuuunk full-width" disabled="disabled">
 					    </div>
 			           </div><!--/col-lg-7 -->
-					  
+
 					  </div>
 
 
@@ -338,7 +355,7 @@
 
 			{% endif %}
 
-	{% endif %}		
+	{% endif %}
 
 		 </div><!--/container -->
 		</section>
@@ -353,13 +370,13 @@
 			$('.check').click(function() {
 				$('.check').not(this).prop('checked', false);
 			});
-			
+
 			var checkboxes = $("input[type='checkbox']"),
 				submitButt = $("input[type='submit']");
 
 			checkboxes.click(function() {
 				submitButt.attr("disabled", !checkboxes.is(":checked"));
-			});			
+			});
 		});
 		</script>
 
@@ -368,23 +385,23 @@
            $(document).ready(function(){
               swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
            });
-          </script> 
-        {% endif %}   
+          </script>
+        {% endif %}
 
         {% if flash.getMessage('warning') %}
           <script>
            $(document).ready(function(){
               swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
            });
-          </script> 
-        {% endif %}  
+          </script>
+        {% endif %}
 
         {% if flash.getMessage('error') %}
           <script>
            $(document).ready(function(){
               swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
            });
-          </script> 
-        {% endif %} 
+          </script>
+        {% endif %}
 
 {% endblock %}
