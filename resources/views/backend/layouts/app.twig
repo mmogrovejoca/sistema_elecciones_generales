@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="{{ base_url() }}/backend/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="{{ base_url() }}/backend/assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{{ base_url() }}/backend/assets/css/style.css">
+    {% block styles %}{% endblock %}
+
+    <title>{{ web.sitename }} - {{ web.title }}</title>
+  </head>
+
+  <body>
+    
+    {% include "backend/layouts/inc/sidenav.twig" %}
+
+    {% include "backend/layouts/inc/navigation.twig" %}
+
+
+      {% block content %}{% endblock %}
+
+     <!-- ==============================================
+     Scripts
+     =============================================== -->
+     <script src="{{ base_url() }}/backend/assets/js/vendor-all.min.js"></script>
+     <script src="{{ base_url() }}/backend/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+     <script src="{{ base_url() }}/backend/assets/js/pcoded.min.js"></script>
+     <script src="{{ base_url() }}/backend/assets/plugins/sweetalert/sweetalert.min.js"></script>
+     {% block scripts %}{% endblock %}    
+  </body>
+</html>

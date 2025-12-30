@@ -1,0 +1,55 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                            
+                            <div class="row">
+  
+                       <div id="chartContainer" style="height: 690px; width: 100%;"></div>
+
+                                
+                            </div><!--/ row --> 
+                                 
+            
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>    
+<script>
+
+
+window.onload = function() {
+    
+var data = {{ count|raw }};
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Nominees votes percentages for {{ category.title }}",
+        fontSize: 28,
+	},
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: data,
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+
+{% endblock %} 

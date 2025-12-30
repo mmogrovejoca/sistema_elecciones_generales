@@ -1,0 +1,72 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                            
+                            <div class="row">
+  
+                       <div id="chartContainer" style="height: 890px; width: 100%;"></div>
+
+                                
+                            </div><!--/ row --> 
+                                 
+            
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>    
+<script>
+window.onload = function() {
+    
+//var data = {{ dataPoints|raw }};
+var data = {{ count|raw }};
+//var data = {{ cat|raw }};
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Nominees Votes Percentages"
+	},
+	axisY: {
+		title: "Percentages (%)",
+		includeZero: true,
+		//prefix: "$",
+		suffix:  "%",
+           labelMaxWidth: 180,           
+           labelAutoFit: true,
+     },
+   		axisX: {
+           interval: 1,    
+           labelMaxWidth: 180,     
+           labelFontFamily:"verdana0",
+           margin: 10,    
+           labelFontSize: 12    
+       }, 
+	data: [{
+		type: "bar",
+		yValueFormatString: "0",
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontWeight: "bolder",
+		indexLabelFontColor: "white",
+		dataPoints: data,
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+
+{% endblock %} 

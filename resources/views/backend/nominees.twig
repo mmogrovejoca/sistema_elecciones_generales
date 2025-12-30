@@ -1,0 +1,107 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block styles %}
+ <link rel="stylesheet" type="text/css" href="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.css"/>
+{% endblock %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+
+
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Nominees</h5>
+                                        </div>
+                                        <div class="card-block px-3 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="myTable">
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Image</th>
+                                                     <th>Name & tag line</th>
+                                                     <th>Category</th>
+                                                     <th>Action</th>
+                                                    </tr>
+                                                  </thead>
+                                                    <tbody>
+
+                                                    {% for nom in nominees %}
+                                                        <tr class="unread">
+                                                            <td><img class="rounded-circle" style="width:60px;" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}" alt="activity-user"></td>
+                                                            <td>
+                                                                <h6 class="mb-1">{{ nom.name }}</h6>
+                                                                <p class="m-0">{{ nom.tag_line }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="text-muted">{{ nom.category }}</h6>
+                                                            </td>
+                                                            <td>
+                                                            <a href="{{ path_for('admin.nominee_edit', { id: nom.id }) }}" class="btn btn-success">Edit</a>
+                                                            <a href="{{ path_for('admin.nominee_delete', { id: nom.id }) }}" class="btn btn-danger">Delete</a></td>
+                                                        </tr>
+                                                    {% endfor %} 
+                                                    </tbody>
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Image</th>
+                                                     <th>Name & tag line</th>
+                                                     <th>Category</th>
+                                                     <th>Action</th>
+                                                    </tr>
+                                                  </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                        
+      
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script type="text/javascript" src="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.js"></script>
+  <script>
+  $(document).ready( function () {
+    $('#myTable').DataTable({
+          "ordering": false,    
+    });
+  } );  
+  
+  </script>
+
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

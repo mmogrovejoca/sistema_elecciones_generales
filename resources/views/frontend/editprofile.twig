@@ -1,0 +1,139 @@
+{% extends 'frontend/layouts/app.twig' %}
+
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Header Section Section
+	    =============================================== -->	
+		
+		<section class="header-section">
+		 <div class="container">
+		  <div class="row banner-content">
+		   <span class="label label-grey">Voter</span>
+		   <h1>Edit Profile</h1>
+		   <h4>{{ user.name }}</h4>
+		  </div>
+		 </div>
+		</section>
+
+	    <!-- ==============================================
+	    Voting Section
+	    =============================================== -->	
+		
+		<section class="voting-section">
+		 <div class="container">
+		  <div class="row">
+		{% if user.verified == 0 %}  
+		   <h1>Account not verified</h1>
+		{% elseif user.verified == 1 %}   
+		   <h1>Account verified</h1>
+    {% elseif user.verified == 2 %}   
+       <h1>Account Declined</h1>
+		{% endif %}
+		  </div>
+		  <br>
+		  <div class="row">
+		  
+		   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+            <div class="card card-edit">
+             <div class="card-header">
+              <h5>Edit name</h5>
+             </div>
+             <div class="card-body">
+			  <form action="{{ path_for('editname') }}" method="post">
+				<div class="form-group">
+					<label>Name</label>
+					<input name="name" type="text" class="form-control{{ errors.name ? ' is-invalid' : '' }}" value="{{ user.name }}">
+                    {% if errors.name %}
+                      <div class="invalid-feedback">{{ errors.name | first }}</div>
+                    {% endif %}
+				</div>
+				<div class="form-group">
+					<label>Email</label>
+					<input name="email" type="text" class="form-control{{ errors.email ? ' is-invalid' : '' }}" value="{{ user.email }}">
+                    {% if errors.email %}
+                      <div class="invalid-feedback">{{ errors.email | first }}</div>
+                    {% endif %}
+				</div>
+                   
+                {{ csrf.field | raw }}
+
+				<button type="submit" class="kafe-btn kafe-btn-duuuunk">Submit</button>
+			  </form>
+			 </div>
+			</div>	
+           </div><!--/col-lg-6 -->
+		  
+		   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+            <div class="card card-edit">
+             <div class="card-header">
+              <h5>Change password</h5>
+             </div>
+             <div class="card-body">
+                <form action="{{ path_for('password') }}" method="post">
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <input type="password" class="form-control{{ errors.current_password ? ' is-invalid' : '' }}" name="current_password" placeholder="Current Password">
+                        {% if errors.current_password %}
+                          <div class="invalid-feedback">{{ errors.current_password | first }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <input type="password" class="form-control{{ errors.new_password ? ' is-invalid' : '' }}" name="new_password" placeholder="New Password">
+                        {% if errors.new_password %}
+                          <div class="invalid-feedback">{{ errors.new_password | first }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm New Password</label>
+                        <input type="password" class="form-control{{ errors.confirm_password ? ' is-invalid' : '' }}" name="confirm_password" placeholder="Confirm New Password">
+                        {% if errors.confirm_password %}
+                          <div class="invalid-feedback">{{ errors.confirm_password | first }}</div>
+                        {% endif %}
+                    </div>
+
+                    {{ csrf.field | raw }}
+
+                    <button type="submit" class="kafe-btn kafe-btn-duuuunk">Submit</button>
+                </form>
+			 </div>
+			</div>	
+           </div><!--/col-lg-6 -->
+  
+		  
+		  </div><!--/row -->
+		 </div><!--/container -->
+		</section>	
+
+{% endblock %}
+
+{% block scripts %}
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %} 
+
+
+{% endblock %}

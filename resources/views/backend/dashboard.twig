@@ -1,0 +1,329 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block styles %}
+ <link rel="stylesheet" href="{{ base_url() }}/backend/assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.css" />
+{% endblock %}
+
+{% block title %}Best - Online Voting System {% endblock %}
+
+
+{% block content %}
+
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!--[ daily sales section ] start-->
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card daily-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Voters</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-users text-c-duuuunk f-30 m-r-10"></i> {{ count_voters }}</h3>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card daily-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Nominees</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-users text-c-duuuunk f-30 m-r-10"></i> {{ count_nominees }}</h3>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card daily-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Categories</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-layers text-c-duuuunk f-30 m-r-10"></i> {{ count_categories }}</h3>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+								
+
+                            </div>
+							<div class="row">
+							    <div class="col-md-8">
+
+
+                            {% if start == true %} 
+
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Your Voting</h5>
+                                        </div>
+                                        <div class="card-block px-3 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="myTable">
+                                                    <thead>
+                                                      <tr>
+                                                       <th>Title</th>
+                                                       <th>Date to start</th>
+                                                       <th>Date to end</th>
+                                                       <th>Finish Voting</th>
+                                                       <th>Action</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    {% for st in start_array %}
+
+                                                        <tr class="unread" id="tr{{ st.id }}">
+                                                            <td><h6 class="text-muted mb-1">{{ st.title }}</h6></td>
+                                                            <td><h6 class="text-muted">{{ st.date_to_start }}</h6></td>
+                                                            <td><h6 class="text-muted">{{ st.date_to_end }}</h6></td>
+                                                        {% if st.end == 0 %}    
+                                                            <td><a href="{{ path_for('admin.finish', { id: st.id }) }}" class="btn btn-danger">Finish Voting</a></td>
+                                                        {% else %}
+                                                            <td><h6 class="text-muted">Ended on:- {{ st.date_ended}}</h6>
+                                                            <a href="{{ path_for('admin.resume', { id: st.id }) }}" class="btn btn-secondary">Resume Voting</a></td>
+                                                        {% endif %}    
+                                                            <td>
+                                                        {% if st.end == 0 %}  
+                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                                              Edit
+                                                             </button>
+                                                        {% endif %} 
+                                                             <a href="{{ path_for('admin.start_delete', { id: st.id }) }}" class="btn btn-danger">Delete</a></td>
+                                                        </tr>
+
+                                                    {% endfor %}    
+                                                    </tbody>
+                                                    <thead>
+                                                      <tr>
+                                                       <th>Title</th>
+                                                       <th>Date to start</th>
+                                                       <th>Date to end</th>
+                                                       <th>Finish Voting</th>
+                                                       <th>Action</th>
+                                                      </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Your Voting</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+
+                                    <form action="{{ path_for('admin.start_update') }}" method="post">
+
+                                     {% for st in start_array %}
+
+                                        <input type="hidden" name="start_id" class="form-control" value="{{ st.id }}" />
+
+                                        <div class="form-group">
+                                            <label>Title of your voting e.g The Masha Brand company competitions</label>
+                                            <input type="text" name="title" class="form-control{{ errors.title ? ' is-invalid' : '' }}" value="{{ st.title }}">
+                                            {% if errors.title %}
+                                              <div class="invalid-feedback">{{ errors.title | first }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>The date when the voting should start (click the icon to select)</label>
+                                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                                <input type="text" name="date_to_start" class="form-control{{ errors.date_to_start ? ' is-invalid' : '' }} datetimepicker-input" size="40" data-target="#datetimepicker1" value="{{ st.date_to_start }}"/>
+                                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                                </div>
+                                            {% if errors.date_to_start %}
+                                              <div class="invalid-feedback">{{ errors.date_to_start | first }}</div>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>The date when the voting should end (click the icon to select)</label>
+                                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                                <input type="text" name="date_to_end" class="form-control{{ errors.date_to_end ? ' is-invalid' : '' }} datetimepicker-input" size="40" data-target="#datetimepicker2" value="{{ st.date_to_end }}"/>
+                                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                                </div>
+                                            {% if errors.date_to_end %}
+                                              <div class="invalid-feedback">{{ errors.date_to_end | first }}</div>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea type="text" name="description" class="form-control{{ errors.description ? ' is-invalid' : '' }}">{{ st.description }}</textarea>
+                                            {% if errors.description %}
+                                              <div class="invalid-feedback">{{ errors.description | first }}</div>
+                                            {% endif %}
+                                        </div>
+
+                                     {% endfor %}  
+
+                                       {{ csrf.field | raw }}
+
+
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                          </div>
+
+                                    </form>
+                                        </div>
+                                      </div>
+                                    </div>                                     
+
+                            {% else %}     
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Start your voting system</h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                    <form action="{{ path_for('admin.start') }}" method="post">
+                                        <div class="form-group">
+                                            <label>Title of your voting e.g The Masha Brand company competitions</label>
+                                            <input type="text" name="title" class="form-control{{ errors.title ? ' is-invalid' : '' }}" placeholder="Title of your voting e.g The Masha Brand company competitions">
+                                            {% if errors.title %}
+                                              <div class="invalid-feedback">{{ errors.title | first }}</div>
+                                            {% endif %}
+                                        </div>
+										<div class="form-group">
+                                            <label>The date when the voting should start (click the icon to select)</label>
+											<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+												<input type="text" name="date_to_start" class="form-control{{ errors.date_to_start ? ' is-invalid' : '' }} datetimepicker-input" size="40" data-target="#datetimepicker1"/>
+												<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+													<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+												</div>
+                                            {% if errors.date_to_start %}
+                                              <div class="invalid-feedback">{{ errors.date_to_start | first }}</div>
+                                            {% endif %}
+											</div>
+										</div>
+										<div class="form-group">
+                                            <label>The date when the voting should end (click the icon to select)</label>
+											<div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+												<input type="text" name="date_to_end" class="form-control{{ errors.date_to_end ? ' is-invalid' : '' }} datetimepicker-input" size="40" data-target="#datetimepicker2"/>
+												<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+													<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+												</div>
+                                            {% if errors.date_to_end %}
+                                              <div class="invalid-feedback">{{ errors.date_to_end | first }}</div>
+                                            {% endif %}
+											</div>
+										</div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea type="text" name="description" class="form-control{{ errors.description ? ' is-invalid' : '' }}"></textarea>
+                                            {% if errors.description %}
+                                              <div class="invalid-feedback">{{ errors.description | first }}</div>
+                                            {% endif %}
+                                        </div>
+
+                                       {{ csrf.field | raw }}
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+										</div>
+									</div>
+
+                                {% endif %}    	
+								</div>	
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Instructions</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="lead m-t-0">Starting your voting system</p>
+                                            After you have set your <mark>title + start date & end date</mark> then you can now start to add <mark>categories + nominees</mark>.
+                                            <br>
+                                            <br>
+                                            You can delete your voting which will include deleting <mark>categories + nominees</mark>.
+                                            <br>
+                                            <br>
+                                            <mark>Finish Voting</mark> means that voters cannot vote. You can still resume the voting, where the voting will continue until the date you set for end of voting.
+                                        </div>
+                                    </div>
+                                </div>
+							</div><!--/row --> 
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="{{ base_url() }}/backend/assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'L',
+				format: 'YYYY/MM/DD'
+            });			
+            $('#datetimepicker2').datetimepicker({
+                format: 'L',
+                format: 'YYYY/MM/DD'
+            });	
+        });
+    </script>
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %} 
+
+
+{% endblock %}

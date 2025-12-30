@@ -1,0 +1,119 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                      
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Edit Nominee</h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                        <form action="{{ path_for('admin.nominee_postedit') }}" method="post">
+                                          
+                                           <input type="hidden" name="id" value="{{ nominee.id }}" />
+
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" name="name" class="form-control{{ errors.name ? ' is-invalid' : '' }}" value="{{ nominee.name }}">
+                                                {% if errors.name %}
+                                                  <div class="invalid-feedback">{{ errors.name | first }}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tag Line</label>
+                                                <input type="text" name="tag_line" class="form-control{{ errors.tag_line ? ' is-invalid' : '' }}" value="{{ nominee.tag_line }}">
+                                                {% if errors.tag_line %}
+                                                  <div class="invalid-feedback">{{ errors.tag_line | first }}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Categories</label>
+
+                                                <select name="category_id" type="text" class="form-control">
+                                                       
+                                                      {% for cat in categories %} 
+                                                        <option value="{{ cat.id }}" {% if cat.id == nominee.category_id %} selected="selected" {% endif %} >{{ cat.title }}</option>
+                                                      {% endfor %}
+
+                                                </select>   
+                                            </div>
+
+                                            {{ csrf.field | raw }}
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                    </div>
+                  </div>  
+                </div>  
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Nominee Image</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <img class="img-fluid" style="width:200px; height: 200px;" src="{{ base_url() }}/uploads/nominees/{{ nominee.imagelocation }}" alt="nominee">
+                                           <br>
+                                           <br>
+
+
+                                        <form action="{{ path_for('admin.nominee_image') }}" method="post" enctype="multipart/form-data">
+                                          
+                                           <input type="hidden" name="id" value="{{ nominee.id }}" />
+                                           <input type="hidden" name="imagelocation" value="{{ nominee.imagelocation }}" />
+
+                                            <div class="form-group">
+                                                <input type="file" name="photoimg" id="photoimg" class="form-control">
+                                            </div>
+
+                                            {{ csrf.field | raw }}
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+
+                                        </div>
+                                    </div>
+                </div>  
+              </div>    
+      
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

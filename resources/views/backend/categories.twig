@@ -1,0 +1,95 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+
+
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Categories</h5>
+                                        </div>
+                                        <div class="card-block px-3 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="myTable">
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Title</th>
+                                                     <th>Action</th>
+                                                     <th>Vote percentages of Nominees</th>
+                                                    </tr>
+                                                  </thead>
+                                                    <tbody>
+
+                                                    {% for cat in categories %}
+                                                        <tr class="unread">
+                                                            <td><h6 class="text-muted mb-1">{{ cat.title }}</h6></td>
+                                                            <td>
+                                                            <a href="{{ path_for('admin.category_edit', { id: cat.id }) }}" class="btn btn-success">Edit</a>
+                                                            <a href="{{ path_for('admin.category_delete', { id: cat.id }) }}" class="btn btn-danger">Delete</a></td>
+                                                            <td>
+                                                            <a href="{{ path_for('admin.category_nominees', { id: cat.id }) }}" class="btn btn-info">Nominees vote %</a></td>
+                                                        </tr>
+                                                    {% endfor %} 
+                                                    </tbody>
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Title</th>
+                                                     <th>Action</th>
+                                                     <th>Vote percentages of Nominees</th>
+                                                    </tr>
+                                                  </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                        
+      
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script type="text/javascript" src="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.js"></script>
+  <script>
+  $(document).ready( function () {
+    $('#myTable').DataTable({
+          "ordering": false,    
+    });
+  } );  
+  
+  </script>
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

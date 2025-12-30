@@ -1,0 +1,38 @@
+{% extends 'frontend/layouts/app.twig' %}
+
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Header Section Section
+	    =============================================== -->	
+		
+		<section class="welcome-header-section">
+		 <div class="container">
+		  <div class="row banner-content">
+		   <h1>{{ start.title }}</h1>
+		  </div>
+		 </div>
+		</section>
+		
+	    <!-- ==============================================
+	    Welcome Section Section
+	    =============================================== -->	
+        <section class="welcome-section">
+		 <div class="container">
+		  <div class="row banner-content">
+		  
+		    <p>{{ start.description }}</p>
+		   
+		   
+		  </div>		
+		 </div>
+		</section>	
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+{% endblock %}

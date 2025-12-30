@@ -1,0 +1,58 @@
+{% extends 'backend/layouts/app_login.twig' %}
+
+{% block content %}
+
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+
+                 <form action="{{ path_for('admin.postLogin') }}" method="post"> 
+                    <div class="mb-4">
+                        <i class="feather icon-unlock auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">Admin Login</h3>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control{{ errors.email ? ' is-invalid' : '' }}" name="email" value="{{ old.email }}" placeholder="Email">
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email | first }}</div>
+                        {% endif %}
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control{{ errors.password ? ' is-invalid' : '' }}" name="password" placeholder="Password">
+                        {% if errors.password %}
+                          <div class="invalid-feedback">{{ errors.password | first }}</div>
+                        {% endif %}
+                      </div>
+
+                    <button class="btn btn-success shadow-2 mb-4">Login</button>
+                   
+                   {{ csrf.field | raw }}
+
+                  </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}       
+
+{% endblock %}  

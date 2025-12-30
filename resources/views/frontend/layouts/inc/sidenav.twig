@@ -1,0 +1,70 @@
+	    <!-- ==============================================
+	    Sidenav Section
+	    =============================================== -->	
+
+		<div class="sidenav">
+			<div class="text-center mt-30 mb-30">
+				<div class="d-none d-lg-inline-block">
+					<a class="logo text-uppercase" href="{{ path_for('home') }}"><img src="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" alt="logo" height="90"></a>
+					<h4 class="title">{{ web.sitename }}</h4>
+				</div>	
+			</div>
+				<div class="bar"></div>			
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-expand-lg navbar-custom sticky">
+			    <div class="container">
+					<a class="mobile-re text-uppercase d-inline-block d-lg-none" href="#"><img src="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" alt="logo" height="55"></a>
+				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				        <span class="fas fa-bars"></span>
+				    </button>
+
+				    <div class="collapse navbar-collapse" id="navbarNav">
+				        <ul class="navbar-nav nav flex-column">
+
+				            <li class="nav-item {% if route_name == "home" %} active {% endif %}">
+				                <a class="nav-link" href="{{ path_for('home') }}"><i class="fas fa-smile mr-3"></i> Welcome</a>
+				            </li>
+              {% if start.end == 1 %}
+				            <li class="nav-item {% if route_name == "voting-results" %} active {% endif %}">
+				                <a class="nav-link" href="{{ path_for('voting-results') }}"><i class="fas fa-check mr-3"></i> Results</a>
+				            </li>
+				            <li class="nav-item {% if route_name == "categories" %} active {% endif %}">
+				                <a class="nav-link" href="{{ path_for('categories') }}"><i class="fas fa-align-left mr-3"></i> Categories</a>
+				            </li>
+              {% endif %}
+
+				    {% for cat in categories %}
+				            <li class="nav-item {% if cat.slug == slug %} active {% endif %}">
+				                <a class="nav-link" href="{{ path_for('nominees', { slug: cat.slug }) }}"><i class="fas fa-vote-yea mr-3"></i> {{ cat.title }}</a>
+				            </li>
+				    {% endfor %}  
+
+				    {% if user.isLoggedIn %} 
+
+							<li class="nav-item dropdown {% if route_name == "editprofile" %} active {% endif %}">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-user mr-3"></i> {{ user.name }}</a>
+							  <ul class="dropdown-menu">
+							   <li><a class="dropdown-item" href="{{ path_for('editprofile') }}">Edit Profile</a></li>
+							   <li><a class="dropdown-item" href="{{ path_for('logout') }}">Logout</a></li>
+							  </ul>
+							</li>
+
+					{% else %}		
+
+							<li class="nav-item dropdown">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fas fa-sign-in-alt mr-3"></i> Login/ Register</a>
+							  <ul class="dropdown-menu">
+							   <li><a class="dropdown-item" href="{{ path_for('login') }}">Login</a></li>
+							   <li><a class="dropdown-item" href="{{ path_for('register') }}">Register</a></li>
+							  </ul>
+							</li>
+
+					{% endif %}	
+
+				        </ul>
+				    </div>
+			    </div>
+			</nav>
+			<!-- NAVBAR END-->
+			
+		</div>

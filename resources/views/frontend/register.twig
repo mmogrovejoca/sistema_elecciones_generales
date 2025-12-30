@@ -1,0 +1,62 @@
+{% extends 'frontend/layouts/app_login.twig' %}
+
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Login Section
+	    =============================================== -->	
+		<div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+
+                 <form action="{{ path_for('postregister') }}" method="post"> 
+                    <div class="mb-4">
+                        <i class="fa fa-user auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">Register</h3>
+                    <div class="input-group mb-3">
+                        <input name="name" type="text" class="form-control{{ errors.name ? ' is-invalid' : '' }}" value="{{ old.name }}" placeholder="Name">
+                        {% if errors.name %}
+                          <div class="invalid-feedback">{{ errors.name | first }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="email" type="text" class="form-control{{ errors.email ? ' is-invalid' : '' }}" value="{{ old.email }}" placeholder="Email">
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email | first }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group mb-4">
+                        <input name="password" type="password" class="form-control{{ errors.password ? ' is-invalid' : '' }}" placeholder="password">
+                        {% if errors.password %}
+                          <div class="invalid-feedback">{{ errors.password | first }}</div>
+                        {% endif %}
+                    </div>
+                   
+                   {{ csrf.field | raw }}
+
+                    <button type="submit" class="btn btn-success shadow-2 mb-4">Register</button>
+                    <p class="mb-2 text-muted">Don’t have an account? <a href="{{ path_for('login') }}">Login</a></p>
+                    <p class="mb-2 text-muted">Go to Homepage <a href="{{ path_for('home') }}">Homepage</a></p>
+
+                  </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+{% endblock %}

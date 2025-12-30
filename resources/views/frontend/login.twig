@@ -1,0 +1,78 @@
+{% extends 'frontend/layouts/app_login.twig' %}
+
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Login Section
+	    =============================================== -->	
+		<div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                 <form action="{{ path_for('postlogin') }}" method="post"> 
+                    <div class="mb-4">
+                        <i class="fa fa-user auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">Voter Login</h3>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control{{ errors.email ? ' is-invalid' : '' }}" name="email" value="{{ old.email }}" placeholder="Email">
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email | first }}</div>
+                        {% endif %}
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control{{ errors.password ? ' is-invalid' : '' }}" name="password" placeholder="Password">
+                        {% if errors.password %}
+                          <div class="invalid-feedback">{{ errors.password | first }}</div>
+                        {% endif %}
+                      </div>
+
+                    <button type="submit" class="btn btn-success shadow-2 mb-4">Login</button>
+                    <p class="mb-2 text-muted">Don’t have an account? <a href="{{ path_for('register') }}">Register</a></p>
+                    <p class="mb-2 text-muted">Go to Homepage <a href="{{ path_for('home') }}">Homepage</a></p>
+                   
+                   {{ csrf.field | raw }}
+
+                  </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %} 
+
+{% endblock %}

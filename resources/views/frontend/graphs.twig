@@ -1,0 +1,83 @@
+{% extends 'frontend/layouts/app.twig' %}
+
+{% block styles %}
+ <link rel="stylesheet" type="text/css" href="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.css"/>
+{% endblock %}
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Header Section Section
+	    =============================================== -->	
+		
+		<section class="header-section">
+		 <div class="container">
+		  <div class="row banner-content">
+  {% if date_to_end == date_to_now %}
+		   <span class="label label-grey">Voting Ended</span>
+  {% else %}
+		 {% if start.end == 0 %} 
+		   <span class="label label-grey">Voting Underway</span>
+		 {% else %}
+		   <span class="label label-grey">Voting Ended</span>
+		 {% endif %}  
+  {% endif %}  
+		   <p>From {{ date_to_start }} - {{ date_to_end }}</p>
+		   <h1>{{ cate.title }}</h1>
+		   <h4>{{ start.title }}</h4>
+		  </div>
+		 </div>
+		</section>
+
+	    <!-- ==============================================
+	    Voting Section
+	    =============================================== -->	
+		
+		<section class="voting-section">
+		 <div class="container">
+		  <div class="row">
+              {% if date_to_end == date_to_now %}
+                 <h1>Voting Ended.</h1>
+              {% endif %}
+		  </div>
+		  <div class="row">
+  
+                       <div id="chartContainer" style="height: 690px; width: 100%;"></div>   
+		  </div>
+
+		 </div><!--/container -->
+		</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>    
+<script>
+
+
+window.onload = function() {
+    
+var data = {{ count|raw }};
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Nominees votes percentages for {{ category.title }}",
+        fontSize: 28,
+	},
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: data,
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+{% endblock %}

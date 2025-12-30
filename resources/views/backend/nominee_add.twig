@@ -1,0 +1,88 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Add Nominee</h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                        <form action="{{ path_for('admin.nominee_post') }}" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" name="name" class="form-control{{ errors.name ? ' is-invalid' : '' }}" placeholder="Name">
+                                                {% if errors.name %}
+                                                  <div class="invalid-feedback">{{ errors.name | first }}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tag Line</label>
+                                                <input type="text" name="tag_line" class="form-control{{ errors.tag_line ? ' is-invalid' : '' }}" placeholder="Tag Line">
+                                                {% if errors.tag_line %}
+                                                  <div class="invalid-feedback">{{ errors.tag_line | first }}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Categories</label>
+
+                                                <select name="category_id" type="text" class="form-control">
+                                                       
+                                                      {% for cat in categories %} 
+                                                        <option value="{{ cat.id }}">{{ cat.title }}</option>
+                                                      {% endfor %}
+
+                                                </select>   
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Image</label>
+                                                <input type="file" name="photoimg" id="photoimg" class="form-control">
+                                            </div>
+
+                                            {{ csrf.field | raw }}
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                    </div>
+                  </div>    
+      
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

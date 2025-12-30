@@ -1,0 +1,950 @@
+/* ==========================================================================
+   Duuuunk - High Quality Front-End Designs
+   ========================================================================== */
+/*
+* Author Name: Duuuunk
+* Author URI: http://www.duuuunk.com
+* Website: http://www.duuuunk.com
+  
+/* ------------------------------------------------------------------- */
+/* Import Section
+---------------------------------------------------------------------- */
+@import url("base.css");				/* Default Reset, Typography, Forms, etc. */
+@import url("bootstrap.min.css");			/* Bootstrap 4.3.1 */
+@import url("fontawesome.all.min.css");		/* Font-awesome 5.9.0 */
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+@import url("https://fonts.googleapis.com/css?family=Rokkitt");
+@import url("https://fonts.googleapis.com/css?family=Abhaya+Libre");
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Sonsie+One&display=swap");
+
+
+
+body {
+
+    background-color: #343a40;
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+
+}
+
+
+/* ==========================================================================
+   Sidenav Section
+   ========================================================================== */
+   
+.mb-30 {
+    margin-bottom: 30px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.bar {
+    height: 1px;
+    margin: 0px 0px 25px;
+    display: block;
+    background-color: #e5e5e5;
+}
+ 
+
+.avtar-info h5, .skill h6, .skill-chart h6, .contact-social .home-icon > li a, .card-header h6, .bottom-social .icon > li a, .hiring-poster h4, .experience-content .experience-box .experience-info .experience-info-header h3, .footer-mdi, .widget-icon > li a {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.bottom-social {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 10px;
+    z-index: 2;
+}
+
+.bottom-social .icon > li a, .about-social .home-icon > li a, .contact-social .home-icon > li a {
+    color: #00a3e1;
+    background-color: #ffffff;
+    transition: all 0.5s;
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(4, 135, 204, 0.5);
+    text-align: center;
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.bottom-social .icon > li a:hover, .about-social .home-icon > li a:hover, .contact-social .home-icon > li a:hover {
+    color: #ffffff;
+    background-color: #00a3e1;
+    border: 1px solid rgba(4, 135, 204, 0.5);
+}
+
+.bottom-social .icon > li a {
+    color: #535353;
+    border: 1px solid #535353;
+}
+
+/*===============================
+        Navbar Custom
+=================================*/
+
+.sidenav h4.title {
+font-family: "Abril Fatface", 'sans-serif';
+letter-spacing: 0.125rem;
+padding: 0px 20px 10px 20px;
+font-size: 2em;
+color: #1f2f43;
+  margin-top: 20px !important;
+}
+
+.navbar-custom{
+    margin-top: 0px;
+    color: #000 !important;
+}
+
+.navbar-custom .navbar-nav li a {
+	font-family: 'Abhaya Libre', serif;
+	font-size: 16px;
+    line-height: 25px;
+    color: #535353;
+    font-size: 15px;
+    transition: all 0.4s;
+    font-weight: 400;
+    background-color: transparent !important;
+    padding: 6px 0;
+    margin: 15px 10px;
+}
+
+.navbar-nav {
+    display: block;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.navbar-toggler {
+    font-size: 24px;
+    margin-top: 5px;
+    padding-right: 15px;
+    margin-bottom: 0px;
+    color: #535353;
+}
+
+.logo {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.navbar-custom .navbar-nav li.active a,
+.navbar-custom .navbar-nav li a:hover,
+.navbar-custom .navbar-nav li a:active {
+    color: #ea4c89 !important;
+}
+
+.navbar-toggle {
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: #ffffff;
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+    background-color: transparent;
+    border-color: #337ab7;
+}
+
+.navbar-custom .navbar-toggles {
+    padding: .25rem .75rem;
+    font-size: 18px;
+    background: 0 0;
+    border: 1px solid transparent;
+    color: #fff;
+    outline: 0;
+}
+
+.navbar-custom .navbar-toggles-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+
+.menu-toggle {
+    padding: 4.5px 10px !important;
+}
+
+.menu-toggle span {
+    line-height: 27px;
+}
+
+
+/*---NAVBAR STICKY---*/
+.nav-sticky.navbar-custom.sticky-light {
+    background-color: #fff;
+}
+
+.nav-sticky.navbar-custom .navbar-nav li a {
+    color: #535353;
+}
+
+.nav-sticky.navbar-custom .navbar-nav li.active a,
+.nav-sticky.navbar-custom .navbar-nav li a:hover,
+.nav-sticky.navbar-custom .navbar-nav li a:active {
+    color: #00a3e1 !important;
+}
+
+.navbar .navbar-nav li.active {
+    background: #ea4c89 !important;
+	color: #fff !important;
+}
+.navbar .navbar-nav li.active a{
+	color: #fff !important;
+}
+
+/*--- Dropdown --*/
+.navbar .navbar-nav li.active a.dropdown-toggle,
+.navbar .navbar-nav li a.dropdown-toggle {
+ text-decoration: none;
+}
+.navbar .navbar-nav li a.dropdown-toggle:hover,
+.navbar .navbar-nav li a.dropdown-toggle:active{
+ color: #d4145a !important;
+}
+.navbar .navbar-nav li.active a.dropdown-toggle:hover,
+.navbar .navbar-nav li.active a.dropdown-toggle:active{
+ color: #fff !important;
+}
+.navbar ul.dropdown-menu li{
+ padding: 0px 0px !important;
+ margin: 0px !important; 
+}
+.navbar li.active a.dropdown-item,
+.navbar li a.dropdown-item{
+ padding: 0px 0px !important;
+ color: #535353 !important; 
+}
+
+
+.nav-sticky.navbar-custom .navbar-toggles {
+    padding: .25rem .75rem;
+    border: 1px solid transparent;
+    outline: 0;
+}
+
+.nav-sticky .navbar-nav {
+    margin-top: 0px;
+}
+
+.nav-sticky .logo {
+    color: #000 !important;
+}
+
+/*==============================
+        HOME RESPONSIVE
+================================*/
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .navbar-toggler i{
+        font-size: 24px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        color: #ffffff;
+    }
+
+    .nav-sticky .logo {
+        color: #fff !important;
+        margin-left: 15px;
+    }
+
+    .title-heading h1 {
+        font-size: 40px;
+    }
+    
+    .blog-item {
+        margin: 20px 0px;
+    }
+
+    .footer-menu {
+        text-align: center;
+    }
+
+    .navbar-custom {
+        margin-left: 0;
+    }
+
+    .main {
+        margin-left: 0px;
+        padding: 0px;
+    }
+
+    .hiring-text {
+        margin-bottom: 20px;
+    }
+
+    .hiring-text, .hiring-button {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-custom .navbar-nav li a {
+        line-height: 10px;
+    }
+
+    .hobby-div .icon i {
+        font-size: 25px;
+        height: 65px;
+        width: 65px;
+        line-height: 65px;
+    }
+
+    .hobby-head {
+        max-width: 65px;
+        text-align: center;
+    }
+
+    .counter {
+        margin-top: 15px;
+    }
+}
+
+@media (min-width:768px) and (max-width: 1024px) {
+    .title-heading h1 {
+        font-size: 70px;
+    }    
+
+    .hobby-div .icon i {
+        font-size: 25px;
+        height: 70px;
+        width: 70px;
+        line-height: 70px;
+    }
+
+    .hobby-head {
+        max-width: 70px;
+        text-align: center;
+    }
+
+    .about-list .title-head {
+        max-width: 96px;
+    }
+}
+
+@media (min-width: 992px) {
+    .sidenav {
+        height: 100%;
+        width: 280px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        background-color: #ffffff;
+        box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
+    }
+    .navbar-expand-lg .navbar-collapse{
+        display: block !important;
+    }
+    .main {
+        margin-left: 280px;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-custom {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        z-index: 99;
+    }
+
+    .navbar-custom {
+        margin-top: 0px;
+        padding: 10px 0px !important;
+        background-color: #fff !important;
+        box-shadow: 0 10px 33px rgba(0, 0, 0, .1);
+        color: #fff !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1366px) {
+    .avtar-image img {
+        width: 200px;
+    }
+
+    .navbar-expand-lg .navbar-collapse {
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .section-subtitle-top {
+        font-size: 45px;
+        top: 25px;
+    }
+
+    .section-title h3 {
+        font-size: 22px;
+    }
+
+    .mobile-re {
+        padding-left: 15px;
+        visibility: visible;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-height: 650px) {
+	.bottom-social {
+		margin-top: 30px;
+		position: relative;
+		padding-left: 30px;
+	}
+}
+
+
+.header-section{
+	height: 40vh;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#e97a99), to(#fac9b6));
+background-image: linear-gradient(to bottom, #e97a99, #fac9b6);
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-section .banner-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.header-section .banner-content span{
+ margin-bottom: 20px;
+}
+.header-section .banner-content h1{
+font-family: "Abril Fatface", 'sans-serif';
+letter-spacing: 0.125rem;
+padding: 0px 20px 10px 20px;
+font-size: 3em;
+color: #1f2f43;
+}
+.header-section .banner-content p{
+font-family: 'Abhaya Libre', serif;
+font-size: 15px;
+color: #1f2f43;
+}
+.header-section .banner-content h4{
+font-family: 'Abhaya Libre', serif;
+font-size: 20px;
+color: #1f2f43;
+}
+@media (max-width: 768px) {
+	.header-section{
+	  height: 80vh;
+	}	
+	.header-section .banner-content h1{
+	font-size: 2em;
+	}	
+	
+}
+
+.welcome-header-section{
+  height: 60vh;
+  background: linear-gradient( rgba(34,34,34,0.6), rgba(34,34,34,0.6) ), url('../img/best.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+    padding: 50px 0px 0px;
+    overflow: hidden;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.welcome-header-section .banner-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.welcome-header-section .banner-content span{
+ margin-bottom: 20px;
+}
+.welcome-header-section .banner-content h1{
+font-family: "Abril Fatface", 'sans-serif';
+letter-spacing: 0.125rem;
+padding: 0px 20px 10px 20px;
+font-size: 6em;
+color: #fff;
+}
+.welcome-header-section .banner-content p{
+font-family: 'Abhaya Libre', serif;
+font-size: 15px;
+color: #fff;
+}
+.welcome-header-section .banner-content h4{
+font-family: 'Abhaya Libre', serif;
+font-size: 20px;
+color: #fff;
+}
+@media (max-width: 768px) {
+  .welcome-header-section{
+    height: 50vh;
+  } 
+  .welcome-header-section .banner-content h1{
+  font-size: 2em;
+  } 
+  
+}
+
+
+
+.welcome-section{
+  height: 40vh;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#e97a99), to(#fac9b6));
+background-image: linear-gradient(to bottom, #e97a99, #fac9b6);
+  width: 100%;
+  padding: 10px 40px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.welcome-section .banner-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.welcome-section .banner-content h2 {
+    font-family: "Abril Fatface", 'sans-serif';
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 48px;
+    color: #7a7b7c;
+}
+.welcome-section .banner-content p {
+  font-family: 'Abhaya Libre', serif;
+    font-size: 2em;
+    font-weight: 500;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+@media (max-width: 768px) {
+  .welcome-section{
+    height: 80vh !important;
+  } 
+  .welcome-section .banner-content h2{
+  font-size: 20px;
+  } 
+  .welcome-section .banner-content p {
+    font-size: 16px;
+  } 
+  
+}
+
+
+.voting-section{
+ padding: 40px 20px;
+}
+.voting-section h1{
+ font-family: "Abril Fatface", 'sans-serif';
+ letter-spacing: 0.125rem;
+ padding: 0px 0px 10px 0px;
+ font-size: 25px;
+ color: #ea4c89;
+}
+
+.card {
+    border: 0;
+    border-radius: 0.25rem;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.card-profile, .card-testimonial {
+    margin-top: 30px;
+}
+.card-plain {
+    background: transparent;
+    box-shadow: none;
+}
+.card .card-image {
+    position: relative;
+}
+.img-raised {
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+	width: 200px;
+	height: 200px;
+}
+h3.number {
+    font-family: 'Sonsie One', cursive;
+    font-size: 2rem;
+    color: #ea4c89;
+}
+h3.text-clean {
+    font-family: "Abril Fatface", 'sans-serif';
+    font-size: 18px;
+    color: #ffffff;
+}
+.card .card-body h4{
+ font-family: "Abril Fatface", 'sans-serif';
+ letter-spacing: 0.125rem;
+ padding: 0px 0px 10px 0px;
+ font-size: 25px;
+ color: #fff;
+}
+.card .card-description{
+ color: rgba(255,255,255,.4);
+}
+.card .card-body h5{
+ font-family: "Abril Fatface", 'sans-serif';
+ padding: 0px 0px 10px 0px;
+ font-size: 18px;
+ color: #fff;
+}
+
+
+
+
+
+/* The customcheck */
+.customcheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	color: rgba(255,255,255,.4);
+	font-family: 'Abhaya Libre', serif;
+	font-size: 16px;
+}
+
+/* Hide the browser's default checkbox */
+.customcheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.customcheck:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.customcheck input:checked ~ .checkmark {
+    background-color: #ea4c89;
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.customcheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.customcheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.voting-btn{
+ padding: 40px 0px;	
+}
+
+/**  =====================
+      Authentication css start
+==========================  **/
+.auth-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  min-width: 100%;
+  min-height: 100vh;
+}
+.auth-wrapper a,
+.auth-wrapper p > a {
+  color: #111;
+  font-weight: 600;
+}
+.auth-wrapper .btn-auth-gen .btn-icon {
+  width: 140px;
+  height: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 45px;
+}
+.auth-wrapper .btn-auth-gen .btn-icon small {
+  font-size: 15px;
+}
+.auth-wrapper .input-group {
+  background: transparent;
+}
+.auth-wrapper .card {
+  margin-bottom: 0;
+}
+.auth-wrapper > div {
+  z-index: 5;
+}
+.auth-wrapper .auth-content {
+  position: relative;
+  width: 390px;
+  padding: 15px;
+  z-index: 5;
+}
+.auth-wrapper .auth-content.multyform, .auth-wrapper .auth-content.subscribe {
+  width: 750px;
+}
+@media only screen and (max-width: 768px) {
+  .auth-wrapper {
+    max-width: 360px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .auth-wrapper .card .card-body {
+    padding: 30px 15px;
+  }
+}
+.auth-wrapper .auth-icon {
+  font-size: 30px;
+}
+.auth-wrapper .auth-icon:before {
+  background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.auth-wrapper.offline {
+  background-image: none;
+}
+.auth-wrapper.offline:before {
+  display: none;
+}
+.auth-wrapper .auth-bg .r {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+.auth-wrapper .auth-bg .r:first-child {
+  top: -100px;
+  right: -100px;
+  background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+}
+.auth-wrapper .auth-bg .r:last-child {
+  left: -100px;
+  bottom: -100px;
+  background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
+}
+.auth-wrapper .auth-bg .r.s {
+  width: 20px;
+  height: 20px;
+}
+.auth-wrapper .auth-bg .r.s:nth-child(2) {
+  top: 150px;
+  right: -150px;
+  background: #04a9f5;
+}
+.auth-wrapper .auth-bg .r.s:nth-child(3) {
+  left: -150px;
+  bottom: 150px;
+  background: #1de9b6;
+}
+.auth-wrapper .auth-bg .r:nth-child(odd) {
+  -webkit-animation: floating 7s infinite;
+          animation: floating 7s infinite;
+}
+.auth-wrapper .auth-bg .r:nth-child(even) {
+  -webkit-animation: floating 9s infinite;
+          animation: floating 9s infinite;
+}
+
+/* image varient start */
+.aut-bg-img {
+  background-image: url("../images/bg-images/bg4.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.aut-bg-img-side p {
+  line-height: 2;
+}
+
+.aut-bg-img .custom-select, .aut-bg-img .form-control,
+.aut-bg-img-side .custom-select,
+.aut-bg-img-side .form-control {
+  background: transparent;
+}
+
+.auth-tabs .tab-content {
+  overflow: hidden;
+  position: relative;
+}
+.auth-tabs .tab-content .auth-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 150px;
+  -webkit-transform: rotate(-30deg);
+          transform: rotate(-30deg);
+}
+
+/* image varient start */
+@-webkit-keyframes floating {
+  from {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+            transform: rotate(0deg) translate(-10px) rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+            transform: rotate(360deg) translate(-10px) rotate(-360deg);
+  }
+}
+@keyframes floating {
+  from {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+            transform: rotate(0deg) translate(-10px) rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+            transform: rotate(360deg) translate(-10px) rotate(-360deg);
+  }
+}
+/**====== Authentication css end ======**/
+
+
+
+.card.card-edit {
+    border-radius: 0;
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.card-edit .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 20px 25px;
+    position: relative;
+}
+.card-edit .card-header h5 {
+	font-family: 'Abhaya Libre', serif;
+    margin-bottom: 0;
+    color: #000;
+    font-size: 17px;
+    font-weight: 400;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 1.1;
+    position: relative;
+}
+.card-edit .card-header h5::after {
+    content: "";
+    background-color: #ea4c89;
+    position: absolute;
+    left: -25px;
+    top: 0;
+    width: 4px;
+    height: 20px;
+}
+.card-edit .card-body {
+    padding: 30px 25px;
+}
+.card-edit .card-body .form-group {
+    margin-bottom: 1rem;
+}
+.card-edit .card-body label {
+	font-family: 'Abhaya Libre', serif;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+.card-edit .card-body .form-control {
+    background: #f4f7fa;
+    padding: 10px 20px;
+    font-size: 14px;
+}

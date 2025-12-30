@@ -1,0 +1,101 @@
+{% extends 'voter/layouts/app.twig' %}
+
+        
+{% block login %}
+  <link href="{{ base_url() }}/assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+      <!-- ==============================================
+   Dashboard Section
+   =============================================== -->
+     <section class="tr-profile section-padding">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-4 col-md-3">  
+      	
+     <!-- Include sidenav.php. Contains navigation content. -->
+    {% include "voter/layouts/inc/sidenav.twig" %}
+ 	 
+      </div>
+	    <div class="col-sm-8 col-md-9">
+	     <div class="tab-content">
+		 
+		  <div role="tabpanel" class="tab-pane fade in active account-info" id="account-info">	
+		  
+		   
+		 		<div class="box box-info">
+                <div class="box-header">
+                  <h3 class="box-title"> Please vote for these guys</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                 <div class="table-responsive">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+					   <th>No</th>
+					   <th>Image</th>
+					   <th>Name</th>
+					   <th>Organization</th>
+					   <th>Running to be</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for nominee in nominees %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><img src="{{ base_url() }}/admin/nominees/{{ nominee.imagelocation }}" width="50" height="30" /></td>
+                        <td>{{ nominee.name }}</td>
+                        {% for organization in organizations %}
+                         {% if nominee.organizationid == organization.organizationid %}
+                           <td>{{ organization.name }}</td>
+                         {% endif %}  
+                        {% endfor %}
+                        {% for position in positions %}
+                         {% if nominee.positionid == position.positionid %}
+                           <td>{{ position.name }}</td>
+                         {% endif %}  
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+					   <th>No</th>
+					   <th>Image</th>
+					   <th>Name</th>
+					   <th>Organization</th>
+					   <th>Running to be</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->  		   
+          
+		  </div><!-- /.tab-pane -->
+		</div>				
+		
+		
+	    </div><!-- /.col-md-9 -->	
+          </div><!-- /.row -->
+      </div><!-- /.container -->
+  </section>  
+
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- DATA TABES SCRIPT -->
+    <script src="{{ base_url() }}/assets/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{ base_url() }}/assets/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("#example1").dataTable();
+      });
+    </script>
+
+{% endblock %}    

@@ -1,0 +1,104 @@
+{% extends 'backend/layouts/app.twig' %}
+
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                            
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Settings</h5>
+                                        </div>
+                                        <div class="card-body">
+                                                    <form action="{{ path_for('admin.site_details') }}" method="post">
+
+                                                        <div class="form-group">
+                                                            <label for="sitename">Website Name</label>
+                                                            <input name="sitename" type="text" class="form-control{{ errors.sitename ? ' is-invalid' : '' }}" value="{{ web.sitename }}">
+                                                            {% if errors.sitename %}
+                                                              <div class="invalid-feedback">{{ errors.sitename | first }}</div>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="title">Title</label>
+                                                            <input name="title" type="text" class="form-control{{ errors.title ? ' is-invalid' : '' }}" value="{{ web.title }}">
+                                                            {% if errors.title %}
+                                                              <div class="invalid-feedback">{{ errors.title | first }}</div>
+                                                            {% endif %}
+                                                        </div>
+
+                                                        {{ csrf.field | raw }}
+
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                        </div>
+                                    </div>  
+                                </div>  
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Favicon</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <img class="img-fluid" style="width:200px; height: 200px;" src="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" alt="favicon">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <form action="{{ path_for('admin.site_image') }}" method="post" enctype="multipart/form-data">
+
+                                               <input type="hidden" name="imagelocation" value="{{ web.imagelocation }}" />
+
+                                                <div class="form-group">
+                                                    <input type="file" name="photoimg" class="form-control">
+                                                </div>
+
+                                                {{ csrf.field | raw }}
+
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>      
+            
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

@@ -1,0 +1,75 @@
+{% extends 'voter/layouts/app.twig' %}
+
+        
+{% block login %}
+{% endblock %}
+
+{% block content %}
+
+      <!-- ==============================================
+   Dashboard Section
+   =============================================== -->
+     <section class="tr-profile section-padding">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-4 col-md-3">  
+      	
+     <!-- Include sidenav.php. Contains navigation content. -->
+    {% include "voter/layouts/inc/sidenav.twig" %}
+ 	 
+      </div>
+	    <div class="col-sm-8 col-md-9">
+
+       <div class="tab-content">      
+
+
+
+      <div role="tabpanel" class="tab-pane fade in active profile" id="profile">
+       
+       <div class="section profile-pic">
+
+       
+        
+       
+       <form role="form" method="post" action="{{ path_for('voter.image') }}" enctype="multipart/form-data">
+       
+        <div class="change-photo">
+       <div class="user-image">
+          <img src="{{ base_url() }}/admin/users/uploads/{{ user.imagelocation }}" alt="Image" class="img-responsive">
+       </div>
+
+       <input type="hidden" name="userid" value="{{ user.userid }}" />
+       <input type="hidden" name="imagelocation" value="{{ base_url() }}/admin/users/{{ user.imagelocation }}" />
+
+       <div style="position:relative;">
+        <a class='kafe-btn kafe-btn-mint-small' style="text-decoration: none !important;" href='javascript:;'>
+        Change Image ...
+        <input type="file" name="photoimg" id="photoimg" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+        <input type="hidden" name="image_name" id="image_name"/>
+        </a>
+        &nbsp;
+        <span class='label label-info' id="upload-file-info"></span>
+      </div>
+        </div><!-- /.change-photo -->
+
+        <div class="box-footer">
+        <button type="submit" name="picture" class="kafe-btn kafe-btn-mint full-width">Submit</button>
+        </div> 
+        
+       </form>  
+        
+           </div><!-- /.section -->   
+
+      
+      </div><!-- /.tab-pane -->
+
+          </div>      
+		
+		
+	    </div><!-- /.col-md-9 -->	
+          </div><!-- /.row -->
+      </div><!-- /.container -->
+  </section>  
+
+{% endblock %}
+   

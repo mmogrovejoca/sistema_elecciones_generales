@@ -1,0 +1,390 @@
+{% extends 'frontend/layouts/app.twig' %}
+
+
+{% block content %}
+ 
+	    <!-- ==============================================
+	    Header Section Section
+	    =============================================== -->	
+		
+		<section class="header-section">
+		 <div class="container">
+		  <div class="row banner-content">
+  {% if date_to_end == date_to_now %}
+		   <span class="label label-grey">Voting Ended</span>
+  {% else %}
+		 {% if start.end == 0 %} 
+		   <span class="label label-grey">Voting Underway</span>
+		 {% else %}
+		   <span class="label label-grey">Voting Ended</span>
+		 {% endif %}  
+  {% endif %}  
+		   <p>From {{ date_to_start }} - {{ date_to_end }}</p>
+		   <h1>{{ cate.title }}</h1>
+		   <h4>{{ start.title }}</h4>
+		  </div>
+		 </div>
+		</section>
+
+	    <!-- ==============================================
+	    Voting Section
+	    =============================================== -->	
+		
+		<section class="voting-section">
+		 <div class="container">
+		  <div class="row">
+  {% if date_to_end == date_to_now %}
+     <h1>Voting Ended.</h1>
+  {% else %}
+	{% if start.end == 0 %}	  
+		{% if user.isLoggedIn %}
+		  {% if user.verified == 1 %}
+		   <h1>Welcome {{ user.name }}, now vote</h1>
+		  {% elseif user.verified == 0 %}
+		   <h1>Welcome {{ user.name }}, you need to get verified to vote</h1>
+		  {% elseif user.verified == 2 %}
+		   <h1>Welcome {{ user.name }}, your account has been declined</h1>
+		  {% endif %} 
+		{% else %}
+		   <h1>Please login to vote</h1>
+		{% endif %}
+   {% else %}
+     <h1>Voting Ended.</h1>
+   {% endif %}    
+  {% endif %}   
+		  </div>
+
+    {% if start.end == 1 %}	
+
+					  <div class="row">
+
+					{% for index, nom in nominees %}  
+					  
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+			            <div class="card card-profile card-plain">
+			             <div class="row">
+						 
+			              <div class="col-md-5">
+			               <div class="card-image">
+			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
+			               </div><!--/card-image -->
+			              </div><!--/col-md-5 -->
+			              <div class="col-md-7">
+			               <div class="card-body">
+			                <h4>{{ nom.name }}</h4>
+			                <p class="card-description">{{ nom.tag_line }}</p>
+
+							  {% for ct in count %}
+
+							   {% if ct.nomineeid == nom.id %}
+
+							    <h5>Votes - {{ ct.g }}</h5>
+
+						       {% endif %}
+
+							  {% endfor %}
+
+
+							  {% for ct in count %}
+
+							   {% if ct.nomineeid == nom.id %}
+
+							    {% if value == ct.g %}
+
+							     {% if value == 0 %}
+                                  
+                                  <h3 class="number">Draw</h3>
+
+							     {% else %}
+                                  
+                                  <h3 class="number">Won</h3>
+
+							     {% endif %}
+
+						        {% endif %}
+
+						       {% endif %}
+
+							  {% endfor %}
+
+
+						{% if r1.nominee == nom.id %}
+
+						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
+
+			            {% endif %}
+			                
+			               </div><!--/card-body -->
+			              </div><!--/col-md-7 -->
+						  
+			             </div><!--/row -->
+			            </div><!--/card -->
+			           </div><!--/col-lg-7 -->
+
+				  {% if(index + 1) % 2 == 0 %}
+			       </div>
+			       <div class="row">
+			      {% endif %} 
+
+			        {% endfor %}   
+			  
+					  
+					  </div><!--/row -->    
+
+    {% elseif date_to_end == date_to_now %}	
+
+					  <div class="row">
+
+					{% for index, nom in nominees %}  
+					  
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+			            <div class="card card-profile card-plain">
+			             <div class="row">
+						 
+			              <div class="col-md-5">
+			               <div class="card-image">
+			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
+			               </div><!--/card-image -->
+			              </div><!--/col-md-5 -->
+			              <div class="col-md-7">
+			               <div class="card-body">
+			                <h4>{{ nom.name }}</h4>
+			                <p class="card-description">{{ nom.tag_line }}</p>
+
+							  {% for ct in count %}
+
+							   {% if ct.nomineeid == nom.id %}
+
+							    <h5>Votes - {{ ct.g }}</h5>
+
+						       {% endif %}
+
+							  {% endfor %}
+
+
+							  {% for ct in count %}
+
+							   {% if ct.nomineeid == nom.id %}
+
+							    {% if value == ct.g %}
+
+							     {% if value == 0 %}
+                                  
+                                  <h3 class="number">Draw</h3>
+
+							     {% else %}
+                                  
+                                  <h3 class="number">Won</h3>
+
+							     {% endif %}
+
+						        {% endif %}
+
+						       {% endif %}
+
+							  {% endfor %}
+
+
+						{% if r1.nominee == nom.id %}
+
+						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
+
+			            {% endif %}
+			                
+			               </div><!--/card-body -->
+			              </div><!--/col-md-7 -->
+						  
+			             </div><!--/row -->
+			            </div><!--/card -->
+			           </div><!--/col-lg-7 -->
+
+				  {% if(index + 1) % 2 == 0 %}
+			       </div>
+			       <div class="row">
+			      {% endif %} 
+
+			        {% endfor %}   
+			  
+					  
+					  </div><!--/row -->    
+
+
+    {% else %}
+
+			{% if has_voted == true %}
+
+					  <div class="row">
+
+					{% for index, nom in nominees %}  
+					  
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+			            <div class="card card-profile card-plain">
+			             <div class="row">
+						 
+			              <div class="col-md-5">
+			               <div class="card-image">
+			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
+			               </div><!--/card-image -->
+			              </div><!--/col-md-5 -->
+			              <div class="col-md-7">
+			               <div class="card-body">
+			                <h4>{{ nom.name }}</h4>
+			                <p class="card-description">{{ nom.tag_line }}</p>
+
+							  {% for ct in count %}
+
+							   {% if ct.nomineeid == nom.id %}
+
+							    <h5>Votes - {{ ct.g }}</h5>
+
+						       {% endif %}
+
+							  {% endfor %}
+
+
+						{% if r1.nominee == nom.id %}
+
+						    <h3 class="text-clean"><i class="fas fa-check-circle"></i> Selected</h3>
+
+			            {% endif %}
+			                
+			               </div><!--/card-body -->
+			              </div><!--/col-md-7 -->
+						  
+			             </div><!--/row -->
+			            </div><!--/card -->
+			           </div><!--/col-lg-7 -->
+
+				  {% if(index + 1) % 2 == 0 %}
+			       </div>
+			       <div class="row">
+			      {% endif %} 
+
+			        {% endfor %}   
+			  
+					  
+					  </div><!--/row -->
+
+			{% else %}
+
+
+			<form action="{{ path_for('vote') }}" method="post">	
+
+					  <div class="row">
+
+					{% for index, nom in nominees %}  
+					  
+					   <div class="col-xl-6 col-lg-6 ml-auto mr-auto">  
+			            <div class="card card-profile card-plain">
+			             <div class="row">
+						 
+			              <div class="col-md-5">
+			               <div class="card-image">
+			                <img class="img img-fluid img-raised rounded" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}">
+			               </div><!--/card-image -->
+			              </div><!--/col-md-5 -->
+			              <div class="col-md-7">
+			               <div class="card-body">
+			                <h4>{{ nom.name }}</h4>
+			                <p class="card-description">{{ nom.tag_line }}</p>
+
+
+					{% if user.isLoggedIn %}
+					  {% if user.verified == 1 %}
+
+			                <label class="customcheck">Select
+			                 <input type="checkbox" class="check" name="nominee" value="{{ nom.id }}">
+			                 <span class="checkmark"></span>
+			                </label>
+
+					  {% endif %} 	
+					{% endif %}		
+
+			               </div><!--/card-body -->
+			              </div><!--/col-md-7 -->
+						  
+			             </div><!--/row -->
+			            </div><!--/card -->
+			           </div><!--/col-lg-7 -->
+
+				  {% if(index + 1) % 2 == 0 %}
+			       </div>
+			       <div class="row">
+			      {% endif %} 
+
+			        {% endfor %}   
+			  
+					  
+					  </div><!--/row -->
+
+					  <div class="row">
+					  
+
+					   
+					   <div class="col-xl-12 col-lg-12 ml-auto mr-auto">  
+					    <div class="voting-btn">
+					     <input type="submit" value="Vote" id="foo" class="kafe-btn kafe-btn-duuuunk full-width" disabled="disabled">
+					    </div>
+			           </div><!--/col-lg-7 -->
+					  
+					  </div>
+
+
+			  {{ csrf.field | raw }}
+
+			</form>
+
+
+
+			{% endif %}
+
+	{% endif %}		
+
+		 </div><!--/container -->
+		</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('.check').click(function() {
+				$('.check').not(this).prop('checked', false);
+			});
+			
+			var checkboxes = $("input[type='checkbox']"),
+				submitButt = $("input[type='submit']");
+
+			checkboxes.click(function() {
+				submitButt.attr("disabled", !checkboxes.is(":checked"));
+			});			
+		});
+		</script>
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %} 
+
+{% endblock %}

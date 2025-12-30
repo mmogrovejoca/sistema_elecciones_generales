@@ -1,0 +1,136 @@
+{% extends 'backend/layouts/app.twig' %}
+
+{% block styles %}
+ <link rel="stylesheet" type="text/css" href="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.css"/>
+{% endblock %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+
+
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <h5>Voters</h5>
+                                        </div>
+                                        <div class="card-block px-3 py-3">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="myTable">
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Name</th>
+                                                     <th>Email</th>
+                                                     <th>Approved</th>
+                                                     <th>Voted</th>
+                                                     <th>Action</th>
+                                                    </tr>
+                                                  </thead>
+                                                    <tbody>
+
+                                                    {% for voter in voters %}
+                                                        <tr class="unread">
+                                                            <td>
+                                                                <h6 class="mb-1">{{ voter.name }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="text-muted">{{ voter.email }}</h6>
+                                                            </td>
+                                                            <td>
+                                                              {% if voter.verified == 1 %}
+                                                                <h6 class="text-muted">Approved</h6>
+                                                              {% elseif voter.verified == 0 %}  
+                                                                <h6 class="text-muted">Waiting to be approved</h6>
+                                                              {% elseif voter.verified == 2 %}  
+                                                                <h6 class="text-muted">Declined</h6>
+                                                              {% endif %}  
+                                                            </td>
+                                                            <td>
+
+                                                              {% for v in votes %}
+
+                                                               {% if v.userid == voter.userid %}
+                                                                
+                                                                {% if v.g > 0 %}
+
+                                                                 <h6>Voted</h6>
+
+                                                                {% else %}  
+
+                                                                 <h6>Not Voted</h6>
+
+                                                                {% endif %}
+                                                                
+                                                               {% endif %}
+
+                                                              {% endfor %}
+                                                                
+                                                            </td>
+                                                            <td>
+                                                            <a href="{{ path_for('admin.delete', { id: voter.userid }) }}" class="btn btn-danger">Delete</a></td>
+                                                        </tr>
+                                                    {% endfor %} 
+                                                    </tbody>
+                                                  <thead>
+                                                    <tr>
+                                                     <th>Name & tag line</th>
+                                                     <th>Email</th>
+                                                     <th>Approved</th>
+                                                     <th>Voted</th>
+                                                     <th>Action</th>
+                                                    </tr>
+                                                  </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                        
+      
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script type="text/javascript" src="{{ base_url() }}/backend/assets/plugins/datatables/datatables.min.js"></script>
+  <script>
+  $(document).ready( function () {
+    $('#myTable').DataTable({
+          "ordering": false,    
+    });
+  } );  
+  
+  </script>
+
+
+        {% if flash.getMessage('success') %}
+          <script>
+           $(document).ready(function(){
+              swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
+           });
+          </script> 
+        {% endif %}   
+
+        {% if flash.getMessage('warning') %}
+          <script>
+           $(document).ready(function(){
+              swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
+           });
+          </script> 
+        {% endif %}  
+
+        {% if flash.getMessage('error') %}
+          <script>
+           $(document).ready(function(){
+              swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
+           });
+          </script> 
+        {% endif %}      
+
+{% endblock %} 

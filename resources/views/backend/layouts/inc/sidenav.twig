@@ -1,0 +1,82 @@
+    <!-- [ navigation menu ] start -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a href="{{ path_for('home') }}" class="b-brand">
+                    <div class="b-bg">
+                        <img class="img-fluid" style="width:40px; height: 40px;" src="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" alt="Admin">
+                    </div>
+                    <span class="b-title">{{ web.sitename }}</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Navigation</label>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.dashboard" %} active {% endif %}">
+                        <a href="{{ path_for('admin.dashboard') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Voters</label>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.registered" %} active {% endif %}">
+                        <a href="{{ path_for('admin.registered') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-check"></i></span><span class="pcoded-mtext">Verify registered voters</span></a>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.voters" %} active {% endif %}">
+                        <a href="{{ path_for('admin.voters') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Voters</span></a>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.voter_results" %} active {% endif %}">
+                        <a href="{{ path_for('admin.voter_results') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-check-square"></i></span><span class="pcoded-mtext">Voter Results</span></a>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.graphs" %} active {% endif %}">
+                        <a href="{{ path_for('admin.graphs') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-shuffle"></i></span><span class="pcoded-mtext">Graph Results</span></a>
+                    </li>
+
+                {% if start == true %}  
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Categories</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu{% if route_name == "admin.category_add" %} active {% endif %} 
+                    {% if route_name == "admin.categories" %} active {% endif %}
+                    {% if route_name == "admin.category_edit" %} active {% endif %}">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-align-left"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{{ path_for('admin.categories') }}" class="">Categories</a></li>
+                            <li class=""><a href="{{ path_for('admin.category_add') }}" class="">Add Categories</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Nominees</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu
+                     {% if route_name == "admin.nominee_add" %} active {% endif %}
+                     {% if route_name == "admin.nominees" %} active {% endif %}
+                     {% if route_name == "admin.nominee_edit" %} active {% endif %}
+                    ">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Nominees</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{{ path_for('admin.nominees') }}" class="">Nominees</a></li>
+                            <li class=""><a href="{{ path_for('admin.nominee_add') }}" class="">Add Nominees</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item {% if route_name == "admin.results" %} active {% endif %}">
+                        <a href="{{ path_for('admin.results') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-check-square"></i></span><span class="pcoded-mtext">Voting Results</span></a>
+                    </li>  
+                {% endif %}   
+                 
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Settings</label>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.settings" %} active {% endif %}">
+                        <a href="{{ path_for('admin.settings') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span class="pcoded-mtext">Settings</span></a>
+                    </li>
+                    <li class="nav-item{% if route_name == "admin.profile" %} active {% endif %}">
+                        <a href="{{ path_for('admin.profile') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Profile</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- [ navigation menu ] end -->

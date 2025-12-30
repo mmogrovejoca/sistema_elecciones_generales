@@ -1,0 +1,41 @@
+    <!-- [ Header ] start -->
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+            <a href="{{ path_for('home') }}" class="b-brand">
+                   <div class="b-bg">
+                        <img class="img-fluid" style="width:40px; height: 40px;" src="{{ base_url() }}/uploads/settings/{{ web.imagelocation }}" alt="Admin">
+                   </div>
+                   <span class="b-title">{{ web.sitename }}</span>
+               </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" href="javascript:">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="{{ base_url() }}/uploads/profile/{{ admin.imagelocation }}" class="img-radius" alt="{{ admin.name }}">
+                                <span>{{ admin.name }}</span>
+                                <a href="{{ path_for('admin.logout') }}" class="dud-logout" title="Logout">
+                                    <i class="feather icon-log-out"></i>
+                                </a>
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="{{ path_for('admin.settings') }}" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                                <li><a href="{{ path_for('admin.profile') }}" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                                <li><a href="{{ path_for('admin.logout') }}" class="dropdown-item"><i class="feather icon-user"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- [ Header ] end -->
