@@ -21,48 +21,60 @@
                                                 <table class="table table-hover" id="myTable">
                                                   <thead>
                                                     <tr>
-                                                     <th>Image</th>
-                                                     <th>Name & tag line</th>
-                                                     <th>Category</th>
-                                                     <th>Votes Received</th>
+                                                     <th>Voter Name</th>
+                                                     <th>DNI</th>
+                                                     <th>DOB</th>
+                                                     <th>Time</th>
+                                                     <th>Signature</th>
+                                                     <th>Candidate Selected</th>
                                                     </tr>
                                                   </thead>
                                                     <tbody>
 
-                                                    {% for nom in nominees %}
+                                                    {% for vote in votes %}
                                                         <tr class="unread">
-                                                            <td><img class="rounded-circle" style="width:60px;" src="{{ base_url() }}/uploads/nominees/{{ nom.imagelocation }}" alt="activity-user"></td>
                                                             <td>
-                                                                <h6 class="mb-1">{{ nom.name }}</h6>
-                                                                <p class="m-0">{{ nom.tag_line }}</p>
+                                                                <h6 class="mb-1">{{ vote.name }}</h6>
                                                             </td>
                                                             <td>
-                                                                <h6 class="text-muted">{{ nom.category }}</h6>
+                                                                <h6 class="mb-1">{{ vote.dni }}</h6>
                                                             </td>
                                                             <td>
-                                                          {% for ct in count %}
-                                                           {% if ct.nomineeid == nom.id %}
-                                                            <h6 class="mb-1">{{ ct.g }}</h6></td>
-                                                           {% endif %} 
-                                                          {% endfor %}  
+                                                                <h6 class="text-muted">{{ vote.dob }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="text-muted">{{ vote.created_at }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                {% if vote.signature %}
+                                                                <img src="{{ base_url() }}/uploads/signatures/{{ vote.signature }}" style="max-height: 50px; max-width: 100px;">
+                                                                {% else %}
+                                                                <span class="text-muted">No Signature</span>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="mb-1">{{ vote.nominee_name }}</h6>
+                                                            </td>
                                                         </tr>
-                                                    {% endfor %} 
+                                                    {% endfor %}
                                                     </tbody>
                                                   <thead>
                                                     <tr>
-                                                     <th>Image</th>
-                                                     <th>Name & tag line</th>
-                                                     <th>Category</th>
-                                                     <th>Votes Received</th>
+                                                     <th>Voter Name</th>
+                                                     <th>DNI</th>
+                                                     <th>DOB</th>
+                                                     <th>Time</th>
+                                                     <th>Signature</th>
+                                                     <th>Candidate Selected</th>
                                                     </tr>
                                                   </thead>
                                                 </table>
                                             </div>
                                         </div>
-                                    </div>   
+                                    </div>
 
-                                        
-      
+
+
             </div>
         </div>
     </div>
@@ -84,14 +96,14 @@
   <script>
   $(document).ready( function () {
     $('#myTable').DataTable({
-          "ordering": false,   
+          "ordering": false,
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
-            ] 
+            ]
     });
-  } );  
-  
+  } );
+
   </script>
 
 
@@ -100,23 +112,23 @@
            $(document).ready(function(){
               swal("Success!", "{{ flash.getMessage('success') | first }}", "success");
            });
-          </script> 
-        {% endif %}   
+          </script>
+        {% endif %}
 
         {% if flash.getMessage('warning') %}
           <script>
            $(document).ready(function(){
               swal("Warning!", "{{ flash.getMessage('warning') | first }}", "warning");
            });
-          </script> 
-        {% endif %}  
+          </script>
+        {% endif %}
 
         {% if flash.getMessage('error') %}
           <script>
            $(document).ready(function(){
               swal("Error!", "{{ flash.getMessage('error') | first }}", "error");
            });
-          </script> 
-        {% endif %}      
+          </script>
+        {% endif %}
 
 {% endblock %} 

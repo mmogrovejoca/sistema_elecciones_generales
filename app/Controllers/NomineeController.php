@@ -58,14 +58,14 @@ class NomineeController extends Controller
       $validation = $this->c->validator->validate($request, [
            'name' => v::notEmpty(),
            'tag_line' => v::notEmpty(),
-      ]); 
+      ]);
 
       if ($validation->failed()) {
         return $response->withRedirect($this->c->router->pathFor('admin.nominee_add'));
       }
-      
+
       $id = $request->getParam('category_id');
-      $categories = $this->c->db->select('categories', '*', ["id" => $id]); 
+      $categories = $this->c->db->select('categories', '*', ["id" => $id]);
       foreach ($categories as $cat) {}
 
       // Check image if uploaded
@@ -87,7 +87,7 @@ class NomineeController extends Controller
         return $str;
       }
 
-      // Upload Image 
+      // Upload Image
       $myFile = $files['photoimg'];
       if ($myFile->getError() === UPLOAD_ERR_OK) {
 
@@ -106,10 +106,10 @@ class NomineeController extends Controller
          'category_id' => $id,
          'category' => $cat["title"],
          'date_added' => date('Y-m-d H:i:s'),
-        ]); 
+        ]);
 
       if ($insert->rowCount() == 1) {
-        
+
         $this->c->flash->addMessage('success', 'Nominee successfully added!');
         return $response->withRedirect($this->c->router->pathFor('admin.nominee_add'));
       }else{
@@ -148,7 +148,7 @@ class NomineeController extends Controller
             'nominee' => $nominee,
             'categories' => $categories,
         ]);
-    }   
+    }
 
     public function postedit(Request $request, Response $response)
     {
@@ -156,14 +156,14 @@ class NomineeController extends Controller
       $id = $request->getParam('id');
 
       $category_id = $request->getParam('category_id');
-      $categories = $this->c->db->select('categories', '*', ["id" => $category_id]); 
+      $categories = $this->c->db->select('categories', '*', ["id" => $category_id]);
       foreach ($categories as $cat) {}
 
 
       $validation = $this->c->validator->validate($request, [
            'name' => v::notEmpty(),
            'tag_line' => v::notEmpty(),
-      ]); 
+      ]);
 
       if ($validation->failed()) {
         return $response->withRedirect($this->c->router->pathFor('admin.nominee_edit', ['id' => $id]));
@@ -181,7 +181,7 @@ class NomineeController extends Controller
         ]);
 
       if ($update->rowCount() == 1) {
-        
+
         $this->c->flash->addMessage('success', 'Nominee successfully updated!');
         return $response->withRedirect($this->c->router->pathFor('admin.nominee_edit', ['id' => $id]));
       }else{
@@ -191,7 +191,7 @@ class NomineeController extends Controller
       }
 
 
-    }  
+    }
 
       public function image(Request $request, Response $response)
     {
@@ -210,20 +210,20 @@ class NomineeController extends Controller
 
       if (file_exists($imagelocation)) {
           unlink($imagelocation);
-      } 
+      }
       else {
             $this->c->flash->addMessage('error', 'Image file does not exist.');
             return $response->withRedirect($this->c->router->pathFor('admin.nominee_edit', ['id' => $id]));
       }
 
-      // Upload Image 
+      // Upload Image
       $myFile = $files['photoimg'];
       if ($myFile->getError() === UPLOAD_ERR_OK) {
 
           $extension = pathinfo($myFile->getClientFilename(), PATHINFO_EXTENSION);
           $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
           $uploadFileName = sprintf('%s.%0.8s', $basename, $extension);
-          
+
           $myFile->moveTo('uploads/nominees/' . $uploadFileName);
       }
 
@@ -235,7 +235,7 @@ class NomineeController extends Controller
         ]);
 
       if ($update->rowCount() == 1) {
-        
+
         $this->c->flash->addMessage('success', 'Nominee Image successfully updated!');
         return $response->withRedirect($this->c->router->pathFor('admin.nominee_edit', ['id' => $id]));
       }else{
@@ -245,7 +245,7 @@ class NomineeController extends Controller
       }
 
 
-    }     
+    }
 
     public function delete(Request $request, Response $response, $args)
     {
@@ -261,17 +261,17 @@ class NomineeController extends Controller
 
       if (file_exists($imagelocation)) {
           unlink($imagelocation);
-      } 
+      }
       else {
             $this->c->flash->addMessage('error', 'Image file does not exist.');
             return $response->withRedirect($this->c->router->pathFor('admin.nominees'));
       }
-       
+
        // delete the entry
       $delete = $this->c->db->delete('nominees', ['id' => $id]);
 
       if ($delete->rowCount() == 1) {
-        
+
         $this->c->flash->addMessage('success', 'Nominee deleted successfully!');
         return $response->withRedirect($this->c->router->pathFor('admin.nominees'));
       }else{
@@ -281,7 +281,7 @@ class NomineeController extends Controller
       }
 
 
-    }  
+    }
 
     public function results(Request $request, Response $response)
     {
@@ -292,25 +292,26 @@ class NomineeController extends Controller
        foreach ($settings as $web) {}
        $start = $this->c->db->has('start', []);
 
-       $nominees = $this->c->db->select('nominees', '*', ["ORDER" => ["date_added" => "DESC"]]);
-       foreach ($nominees as $row) {
-
-         $g = $this->c->db->count('votes', ["nominee" => $row["id"]]);
-          
-          $count[] = [
-               "nomineeid" => $row["id"],
-               "g" => $g,
-          ];
-
-       }
+       // Fetch detailed votes
+       $votes = $this->c->db->select('votes', [
+           '[>]nominees' => ['nominee' => 'id']
+       ], [
+           'votes.name',
+           'votes.dni',
+           'votes.dob',
+           'votes.signature',
+           'votes.created_at',
+           'nominees.name(nominee_name)'
+       ], [
+           "ORDER" => ["votes.created_at" => "DESC"]
+       ]);
 
         return $this->c->view->render($response, 'backend/results.twig', [
             'route_name' => $route_name,
             'web' => $web,
             'start' => $start,
-            'nominees' => $nominees,
-            'count' => $count,
-        ]);
+            'votes' => $votes,
+       ]);
     }
 
     public function graphs(Request $request, Response $response)
@@ -331,28 +332,28 @@ class NomineeController extends Controller
              $total_votes = $this->c->db->count('votes', ["category_id" => $row["id"]]);
              $g = $this->c->db->count('votes', ["nominee" => $nom["id"]]);
 
-             $percentage = $g * 100 / $total_votes;   
+             $percentage = $g * 100 / $total_votes;
 
 
               $count[] = [
                    "label" => $nom["name"].' of category - '.$row["title"],
                    "y" => $percentage,
               ];
-         
-           }       
-            //$cat[] = $count; 
+
+           }
+            //$cat[] = $count;
             //$count = [];
 
        }
-        
-        $data = array( 
+
+        $data = array(
             array("y" => 7,"label" => "March" ),
             array("y" => 12,"label" => "April" ),
             array("y" => 28,"label" => "May" ),
             array("y" => 18,"label" => "June" ),
             array("y" => 41,"label" => "July" )
         );
-        
+
         $dataPoints = json_encode($data);
         $da = json_encode($count);
         //$pa = json_encode($cat);
